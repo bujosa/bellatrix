@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../assets/logo.svg";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Register() {
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  useEffect(() => {
+    const user = localStorage.getItem("bellatrix-user");
+    if (user) {
+      navigate("/chat");
+    }
+  }, []);
 
   const toastOptions = {
     position: "bottom-right",
@@ -49,17 +57,32 @@ function Register() {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (handleValidation()) {
-      toast.success("Registration Successful", {
-        position: "top-center",
-        autoClose: 3000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-      });
+      const { username, email, password } = values;
+      // const { data } = await axios.post(
+      //   "http://localhost:5000/api/auth/register",
+      //   {
+      //     username,
+      //     email,
+      //     password,
+      //   }
+      // );
+
+      // if (data.status === "success") {
+      //   toast.success("Registration Successful", {
+      //     position: "top-center",
+      //     autoClose: 3000,
+      //     pauseOnHover: true,
+      //     draggable: true,
+      //     theme: "dark",
+      //   });
+
+      //   localStorage.setItem("bellatrix-user", JSON.stringify(data.data));
+      // }
+      navigate("/");
     }
   };
 
