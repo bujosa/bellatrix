@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function Chat() {
+function Chat() {
   return (
     <div>Chat</div>
   )
 }
+
+export default Chat
