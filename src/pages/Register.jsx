@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import Logo from '../assets/logo.svg';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FormContainer } from '../styles/register';
+import { FormContainer } from '../styles/FormStyles';
 import { registerRoute } from '../utils/ApiRoutes';
 import axios from 'axios';
 
@@ -19,7 +19,7 @@ function Register() {
   useEffect(() => {
     const user = localStorage.getItem('bellatrix-user');
     if (user) {
-      navigate('/chat');
+      navigate('/');
     }
   }, [navigate]);
 
