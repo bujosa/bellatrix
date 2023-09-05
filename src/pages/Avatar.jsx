@@ -7,12 +7,33 @@ import { toast, ToastContainer } from 'react-toastify';
 import { avatarRoute } from '../utils/ApiRoutes';
 
 export default function Avatar() {
-  const api =
-    'https://api.multiavatar.com/username.svg?size=128&background=none&color=fff&length=1&bold=true&rounded=true&fon';
+  const api = 'https://api.multiavatar.com/456785';
   const [avatar, setAvatar] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedAvatar, setSelectedAvatar] = useState(undefined);
   const navigate = useNavigate();
+
+  const toastOptions = {
+    position: 'bottom-right',
+    autoClose: 4000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: 'dark',
+  };
+
+  const handleAvatar = async () => {};
+
+  useEffect(async () => {
+    for (let i = 0; i < 4; i++) {
+      const image = await axios.get(
+        `${api}/${Math.round(Math.random() * 100)}}`
+      );
+      const buffer = new Buffer.from(image.data, 'base64');
+      const base64Image = buffer.toString('base64');
+    }
+    setAvatar(base64Image);
+    setIsLoading(false);
+  }, []);
 
   return (
     <>
